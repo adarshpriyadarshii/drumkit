@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/7b522f7ee5.js" crossorigin="anonymous"></script>
+    <link rel=icon href=images/android-chrome-512x512.png>
+    <link rel="stylesheet" href="style.css">
+    <title>Drum Kit</title>
+  </head>
+  <body>
+      
+    <div class="keys">
+        <div data-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="sound">Sound 1</span>
+        </div>
+        <div data-key="83" class="key">
+            <kbd>S</kbd>
+            <span class="sound">Sound 2</span>
+        </div>
+        <div data-key="68" class="key">
+            <kbd>D</kbd>
+            <span class="sound">Sound 3</span>
+        </div>
+        <div data-key="70" class="key">
+            <kbd>F</kbd>
+            <span class="sound">Sound 4</span>
+        </div>
+        <div data-key="71" class="key">
+            <kbd>G</kbd>
+            <span class="sound">Sound 5</span>
+        </div>
+        <div data-key="72" class="key">
+            <kbd>H</kbd>
+            <span class="sound">Sound 6</span>
+        </div>
+    </div>
+    <audio data-key="65" src="sounds/sound1.wav"></audio>
+    <audio data-key="83" src="sounds/sound2.wav"></audio>
+    <audio data-key="68" src="sounds/sound3.wav"></audio>
+    <audio data-key="70" src="sounds/sound4.wav"></audio>
+    <audio data-key="71" src="sounds/sound5.wav"></audio>
+    <audio data-key="72" src="sounds/sound6.wav"></audio>
+
+    <footer id="footer">
+    
+        <h1>Contact Me</h1>
+          <a href="https://www.facebook.com/adarshpriyadarshii"><i class="social fab fa-facebook fa-2x"></i></a>
+          <a href="https://www.instagram.com/adarshpriyadarshii/?fbclid=IwAR11VTWkKQKLbxH5440HBabgsjXQinU2hdQrYBZd1Z1pcgp17_5OfPy1hJ0"><i class="social fab fa-instagram fa-2x"></i></a>
+          <a href="https://www.linkedin.com/in/adarshpriyadarshi/"><i class="social fab fa-linkedin fa-2x"></i></a>
+          <a href="https://github.com/adarshpriyadarshii"><i class="social fab fa-github-square fa-2x"></i></a>
+          <a href="mailto:adarsh_p@ce.iitr.ac.in"><i class="social fas fa-envelope fa-2x"></i></a>
+        
+        <p>Made with <i class="fas fa-heart "></i> Adarsh Priyadarshi</p>
+    
+      </footer>
+
+    
+    <script >
+        function playSound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+            if(!audio) return;
+            audio.currentTime = 0;
+            audio.play();
+            key.classList.add('playing');
+        }
+        function removeTransition(e){
+            if(e.propertyName !== 'transform') return;
+            this.classList.remove('playing');
+        }
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => key.addEventListener('transitionend',removeTransition));
+        window.addEventListener('keydown',playSound);
+    </script>
+
+    
+  </body>
+</html>
